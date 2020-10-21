@@ -1,0 +1,156 @@
+div.filters {
+  padding: 1rem;
+  justify-self: right;
+}
+header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+  height: auto;
+  align-items: top;
+  padding: 1rem;
+}
+
+.logo {
+  width: 96px;
+}
+article {
+  display: grid;
+  gap: 20px;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  padding: 1rem;
+}
+article img {
+  border-radius: 24px;
+  width: 100%;
+  height: 267px;
+  object-fit: cover;
+}
+article .meta-data {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-auto-flow: column;
+  align-items: baseline;
+  color: #828282;
+}
+article .super-host {
+  border: 1px solid #4f4f4f;
+  color: #4f4f4f;
+  font-weight: 700;
+  border-radius: 10px;
+  text-align: center;
+  justify-self: left;
+  text-transform: uppercase;
+  padding: 0.5em 1rem;
+  width: auto;
+  margin-right: 1rem;
+}
+article .stay-type {
+  text-align: left;
+  justify-self: left;
+  margin-right: 1rem;
+}
+article .rating {
+  justify-self: right;
+}
+@charset "UTF-8";
+main  {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.stays-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+}
+.stays-header span {
+  justify-self: end;
+}
+
+.header-text {
+  margin-top: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 2.9rem;
+}
+
+.stays-count {
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+}
+
+.stay-container {
+  padding: 10px;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(395px, 1fr));
+}
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700|Montserrat:500");
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+/*10px*/
+body {
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  line-height: 1.65;
+  color: #333;
+}
+
+p {
+  margin-bottom: 1.15rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 2.75rem 0 1.05rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.052em;
+}
+
+h2 {
+  font-size: 2.441em;
+}
+
+h3 {
+  font-size: 1.953em;
+}
+
+h4 {
+  font-size: 1.563em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+small,
+.text_small {
+  font-size: 0.8em;
+}
+
+#root {
+  padding: 0rem 7rem;
+}
+
+/*# sourceMappingURL=/windbnb-master.e31bb0bc.css.map */

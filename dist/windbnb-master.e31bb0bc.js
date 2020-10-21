@@ -28285,7 +28285,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/Filters.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/FilterModal.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28297,13 +28297,158 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Filters() {
-  return _react.default.createElement("button", null, "Filters");
+function FilterModal() {
+  return _react.default.createElement("p", null, "Filter Modal");
+}
+
+var _default = FilterModal;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/Filters.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Filters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FilterModal = _interopRequireDefault(require("./FilterModal"));
+
+require("../styles/Filters.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function Filters(_ref) {
+  var setGuestFilter = _ref.setGuestFilter,
+      setLocationFilter = _ref.setLocationFilter,
+      guestFilter = _ref.guestFilter,
+      locationFilter = _ref.locationFilter;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isFilterOpen = _useState2[0],
+      setFilterOpen = _useState2[1];
+
+  return _react.default.createElement("div", {
+    className: "filters"
+  }, _react.default.createElement("select", {
+    onChange: function onChange(e) {
+      return setLocationFilter(e.target.value);
+    }
+  }, _react.default.createElement("option", {
+    value: ""
+  }, "---Select a city---"), _react.default.createElement("option", {
+    value: "Helsinki"
+  }, "Helsinki"), _react.default.createElement("option", {
+    value: "Turku"
+  }, "Turku"), _react.default.createElement("option", {
+    value: "Oulu"
+  }, "Oulu"), _react.default.createElement("option", {
+    value: "Vaasa"
+  }, "Vaasa")), _react.default.createElement("input", {
+    type: "number",
+    onChange: function onChange(e) {
+      return setGuestFilter(e.target.value);
+    },
+    placeholder: "number of guests"
+  }));
 }
 
 var _default = Filters;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/Header.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./FilterModal":"components/FilterModal.js","../styles/Filters.scss":"styles/Filters.scss"}],"logo.svg":[function(require,module,exports) {
+module.exports = "/logo.86ce68ea.svg";
+},{}],"styles/Header.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28315,15 +28460,37 @@ var _react = _interopRequireDefault(require("react"));
 
 var _Filters = _interopRequireDefault(require("./Filters"));
 
+var _logo = _interopRequireDefault(require("../logo.svg"));
+
+require("../styles/Header.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Header() {
-  return _react.default.createElement("header", null, _react.default.createElement("h1", null, "WindBNB"), _react.default.createElement(_Filters.default, null));
+function Header(_ref) {
+  var setGuestFilter = _ref.setGuestFilter,
+      setLocationFilter = _ref.setLocationFilter,
+      guestFilter = _ref.guestFilter,
+      locationFilter = _ref.locationFilter;
+  return _react.default.createElement("header", null, _react.default.createElement("img", {
+    src: _logo.default,
+    className: "logo",
+    alt: "WindBNB logo"
+  }), _react.default.createElement(_Filters.default, {
+    setGuestFilter: setGuestFilter,
+    setLocationFilter: setLocationFilter,
+    guestFilter: guestFilter,
+    locationFilter: locationFilter
+  }));
 }
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Filters":"components/Filters.js"}],"components/Stay.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Filters":"components/Filters.js","../logo.svg":"logo.svg","../styles/Header.scss":"styles/Header.scss"}],"styles/Stay.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Stay.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28333,15 +28500,37 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+require("../styles/Stay.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Stay() {
-  return _react.default.createElement("p", null, "Stay component");
+function Stay(_ref) {
+  var stay = _ref.stay;
+  console.log(stay);
+  return _react.default.createElement("article", null, _react.default.createElement("img", {
+    src: stay.photo,
+    alt: stay.title
+  }), _react.default.createElement("span", {
+    className: "meta-data"
+  }, _react.default.createElement("span", null, stay.superHost && _react.default.createElement("span", {
+    className: "super-host"
+  }, "Super Host")), _react.default.createElement("span", {
+    className: "stay-type"
+  }, stay.type, " ", stay.beds && " \u2022 ".concat(stay.beds, " beds")), _react.default.createElement("span", {
+    className: "rating"
+  }, "\u2B50\uFE0F ", stay.rating)), _react.default.createElement("span", {
+    className: "title"
+  }, stay.title));
 }
 
 var _default = Stay;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/StaysList.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../styles/Stay.scss":"styles/Stay.scss"}],"styles/StaysList.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/StaysList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28353,15 +28542,178 @@ var _react = _interopRequireDefault(require("react"));
 
 var _Stay = _interopRequireDefault(require("./Stay.js"));
 
+require("../styles/StaysList.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function StaysList() {
-  return _react.default.createElement("main", null, _react.default.createElement("h2", null, "Stays List"), _react.default.createElement(_Stay.default, null), _react.default.createElement(_Stay.default, null), _react.default.createElement(_Stay.default, null));
+function StaysList(_ref) {
+  var stays = _ref.stays;
+  return _react.default.createElement("main", null, _react.default.createElement("div", {
+    className: "stays-header"
+  }, _react.default.createElement("h5", {
+    className: "header-text"
+  }, "Stays in Finland"), _react.default.createElement("span", {
+    className: "stays-count"
+  }, stays.length, " stays")), _react.default.createElement("div", {
+    className: "stay-container"
+  }, stays.map(function (stay) {
+    return _react.default.createElement(_Stay.default, {
+      key: stay.id,
+      stay: stay
+    });
+  })));
 }
 
 var _default = StaysList;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Stay.js":"components/Stay.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Stay.js":"components/Stay.js","../styles/StaysList.scss":"styles/StaysList.scss"}],"stays.json":[function(require,module,exports) {
+module.exports = [{
+  "city": "Helsinki",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Stylist apartment in center of the city",
+  "rating": 4.4,
+  "maxGuests": 3,
+  "type": "Entire apartment",
+  "beds": 2,
+  "photo": "https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
+}, {
+  "city": "Turku",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Nice apartment in center of Helsinki",
+  "rating": 4.2,
+  "maxGuests": 5,
+  "type": "Entire apartment",
+  "beds": 3,
+  "photo": "https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Helsinki",
+  "country": "Finland",
+  "superHost": true,
+  "title": "Arty interior in 1900 wooden house",
+  "rating": 4.5,
+  "maxGuests": 10,
+  "type": "Entire house",
+  "beds": 6,
+  "photo": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Helsinki",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Apartment next to market spuare",
+  "rating": 4.48,
+  "maxGuests": 3,
+  "type": "Entire apartment",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1556020685-ae41abfc9365?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
+}, {
+  "city": "Turku",
+  "country": "Finland",
+  "superHost": true,
+  "title": "Villa Aurora guest-house",
+  "rating": 4.75,
+  "maxGuests": 9,
+  "type": "Entire house",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2249&q=80"
+}, {
+  "city": "Vaasa",
+  "country": "Finland",
+  "superHost": true,
+  "title": "A cosy family house",
+  "rating": 4.95,
+  "maxGuests": 6,
+  "type": "Entire house",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Vaasa",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Lovely Studio near Railway Station",
+  "rating": 4.68,
+  "maxGuests": 2,
+  "type": "Private room",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1505693314120-0d443867891c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2591&q=80"
+}, {
+  "city": "Oulu",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Peaceful little home in city center",
+  "rating": 4.12,
+  "maxGuests": 6,
+  "type": "Entire house",
+  "beds": 3,
+  "photo": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Oulu",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Beautiful new studio apartment nearby the center",
+  "rating": 4.49,
+  "maxGuests": 2,
+  "type": "Entire apartment",
+  "beds": 1,
+  "photo": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2255&q=80"
+}, {
+  "city": "Oulu",
+  "country": "Finland",
+  "superHost": true,
+  "title": "Cozy woodhouse flat with wooden sauna",
+  "rating": 4.38,
+  "maxGuests": 4,
+  "type": "Entire house",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1522156373667-4c7234bbd804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=930&q=80"
+}, {
+  "city": "Vaasa",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Brand new studio apartment near the harbour",
+  "rating": 4.89,
+  "maxGuests": 6,
+  "type": "Entire apartment",
+  "beds": 3,
+  "photo": "https://images.unsplash.com/photo-1494203484021-3c454daf695d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Helsinki",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Beautiful and comfortable old wooden house",
+  "rating": 4.63,
+  "maxGuests": 10,
+  "type": "Entire house",
+  "beds": null,
+  "photo": "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+}, {
+  "city": "Turku",
+  "country": "Finland",
+  "superHost": false,
+  "title": "Turku Nordic Home near city center",
+  "rating": 4.24,
+  "maxGuests": 5,
+  "type": "Entire apartment",
+  "beds": 3,
+  "photo": "https://images.unsplash.com/photo-1519643381401-22c77e60520e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=2253&q=80"
+}, {
+  "city": "Turku",
+  "country": "Finland",
+  "superHost": true,
+  "title": "Nice 2 room apartment close to everything",
+  "rating": 4.34,
+  "maxGuests": 6,
+  "type": "Entire apartment",
+  "beds": 3,
+  "photo": "https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80"
+}];
+},{}],"styles/base.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28369,21 +28721,83 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _Header = _interopRequireDefault(require("./Header"));
 
 var _StaysList = _interopRequireDefault(require("./StaysList"));
 
+var _stays = _interopRequireDefault(require("../stays.json"));
+
+require("../styles/base.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function App() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.default, null), _react.default.createElement(_StaysList.default, null));
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      stays = _useState2[0],
+      setStays = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      guestFilter = _useState4[0],
+      setGuestFilter = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      locationFilter = _useState6[0],
+      setLocationFilter = _useState6[1];
+
+  (0, _react.useEffect)(function () {
+    var staysWithId = _stays.default.forEach(function (stay, id) {
+      return stay.id = Date.now() + id;
+    });
+
+    setStays(_stays.default);
+  }, []);
+
+  function filterByGuest(stay) {
+    if (!guestFilter) {
+      return stay;
+    }
+
+    return stay.maxGuests > Number(guestFilter);
+  }
+
+  function filterByLocation(stay) {
+    if (!locationFilter) {
+      return stay;
+    }
+
+    return stay.city === locationFilter;
+  }
+
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.default, {
+    setGuestFilter: setGuestFilter,
+    setLocationFilter: setLocationFilter,
+    locationFilter: locationFilter,
+    guestFilter: guestFilter
+  }), _react.default.createElement(_StaysList.default, {
+    stays: stays.filter(filterByGuest).filter(filterByLocation)
+  }));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Header":"components/Header.js","./StaysList":"components/StaysList.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Header":"components/Header.js","./StaysList":"components/StaysList.js","../stays.json":"stays.json","../styles/base.scss":"styles/base.scss"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -28423,7 +28837,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64719" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53795" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

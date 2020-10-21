@@ -1,0 +1,12 @@
+header {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	width: 100%;
+	height: auto;
+	align-items: top;
+	padding: 1rem;
+}
+
+.logo {
+	width: 96px;
+}
