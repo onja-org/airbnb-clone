@@ -1,0 +1,30 @@
+.outer-modal {
+	display: grid;
+	align-items: start;
+	justify-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: hsla(0, 0%, 0%, 0.5);
+}
+
+.inner-modal {
+	padding: 1rem 3rem;
+	background-color: white;
+	width: 100%;
+	min-height: 300px;
+}
+
+form {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	height: 100px;
+}
+
+.location,
+.location-picker,
+.location-input {
+	display: grid;
+}

@@ -28285,25 +28285,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/FilterModal.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function FilterModal() {
-  return _react.default.createElement("p", null, "Filter Modal");
-}
-
-var _default = FilterModal;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -28370,7 +28352,178 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/Filters.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/FilterModal.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/FilterModal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+require("../styles/FilterModal.scss");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function FilterModal(_ref) {
+  var setGuestFilter = _ref.setGuestFilter,
+      setLocationFilter = _ref.setLocationFilter,
+      guestFilter = _ref.guestFilter,
+      locationFilter = _ref.locationFilter,
+      setFilterOpen = _ref.setFilterOpen;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setFilterOpen(false);
+  }
+
+  function handleClickOutside(e) {
+    var isOutside = !e.target.closest('.inner-modal');
+
+    if (isOutside) {
+      setFilterOpen(false);
+    }
+  } // we want to change the state for guestFilter attribute
+
+
+  function handleGuest(type, operation) {
+    if (operation === '-') {
+      // guestFilter.adult / guestFilter.children
+      if (guestFilter[type] > 0) {
+        setGuestFilter(_objectSpread({}, guestFilter, _defineProperty({}, type, guestFilter[type] - 1)));
+      } else {
+        return;
+      }
+    } else {
+      // we need to spread the rest of the object, because we don't want to loose the other attributes
+      setGuestFilter(_objectSpread({}, guestFilter, _defineProperty({}, type, guestFilter[type] + 1)));
+    }
+  }
+
+  function handleAdultGuest(operation) {
+    if (operation === '-') {
+      if (guestFilter.adult > 0) {
+        setGuestFilter({
+          adult: guestFilter.adult - 1,
+          children: guestFilter.children
+        });
+      } else {
+        return;
+      }
+    } else if (operation === '+') {
+      setGuestFilter({
+        adult: guestFilter.adult + 1,
+        children: guestFilter.children
+      });
+    }
+  }
+
+  function handleChildrenGuest(operation) {
+    if (operation === '-') {
+      if (guestFilter.children > 0) {
+        setGuestFilter({
+          adult: guestFilter.adult,
+          children: guestFilter.children - 1
+        });
+      } else {
+        return;
+      }
+    } else {
+      setGuestFilter({
+        adult: guestFilter.adult,
+        children: guestFilter.children + 1
+      });
+    }
+  }
+
+  return _react.default.createElement("div", {
+    onClick: handleClickOutside,
+    className: "outer-modal"
+  }, _react.default.createElement("div", {
+    className: "inner-modal"
+  }, _react.default.createElement("form", {
+    onSubmit: handleSubmit
+  }, _react.default.createElement("div", {
+    className: "location"
+  }, _react.default.createElement("div", {
+    className: "location-input"
+  }, _react.default.createElement("span", null, "Location"), _react.default.createElement("span", null, locationFilter ? locationFilter : 'All')), _react.default.createElement("div", {
+    className: "location-picker"
+  }, _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setLocationFilter('');
+    }
+  }, "All cities"), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setLocationFilter('Helsinki');
+    }
+  }, "Helsinki, Finland"), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setLocationFilter('Turku');
+    }
+  }, "Turku, Finland"), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setLocationFilter('Vaasa');
+    }
+  }, "Vaasa, Finland"), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return setLocationFilter('Oulu');
+    }
+  }, "Oulu, Finland"))), _react.default.createElement("div", {
+    className: "guests"
+  }, _react.default.createElement("div", {
+    className: "guests-input"
+  }, _react.default.createElement("div", null, "Guests"), guestFilter.adult + guestFilter.children), _react.default.createElement("div", {
+    className: "guests-buttons"
+  }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Adults"), _react.default.createElement("p", null, "Age 13 or above"), _react.default.createElement("div", {
+    className: "buttons"
+  }, _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return handleAdultGuest('-');
+    }
+  }, "-"), _react.default.createElement("span", null, guestFilter.adult), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return handleAdultGuest('+');
+    }
+  }, "+"))), _react.default.createElement("div", null, _react.default.createElement("h3", null, "Children"), _react.default.createElement("p", null, "Age 2 - 12"), _react.default.createElement("div", {
+    className: "buttons"
+  }, _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return handleChildrenGuest('-');
+    }
+  }, "-"), _react.default.createElement("span", null, guestFilter.children), _react.default.createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return handleChildrenGuest('+');
+    }
+  }, "+"))))), _react.default.createElement("button", null, "Search"))));
+}
+
+var _default = FilterModal;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../styles/FilterModal.scss":"styles/FilterModal.scss"}],"styles/Filters.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -28414,29 +28567,19 @@ function Filters(_ref) {
       isFilterOpen = _useState2[0],
       setFilterOpen = _useState2[1];
 
-  return _react.default.createElement("div", {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
     className: "filters"
-  }, _react.default.createElement("select", {
-    onChange: function onChange(e) {
-      return setLocationFilter(e.target.value);
+  }, _react.default.createElement("span", null, "Location : ", locationFilter), _react.default.createElement("span", null, "Guests : ", guestFilter.adult + guestFilter.children), _react.default.createElement("button", {
+    onClick: function onClick() {
+      return setFilterOpen(!isFilterOpen);
     }
-  }, _react.default.createElement("option", {
-    value: ""
-  }, "---Select a city---"), _react.default.createElement("option", {
-    value: "Helsinki"
-  }, "Helsinki"), _react.default.createElement("option", {
-    value: "Turku"
-  }, "Turku"), _react.default.createElement("option", {
-    value: "Oulu"
-  }, "Oulu"), _react.default.createElement("option", {
-    value: "Vaasa"
-  }, "Vaasa")), _react.default.createElement("input", {
-    type: "number",
-    onChange: function onChange(e) {
-      return setGuestFilter(e.target.value);
-    },
-    placeholder: "number of guests"
-  }));
+  }, "Search"), isFilterOpen && _react.default.createElement(_FilterModal.default, {
+    setFilterOpen: setFilterOpen,
+    guestFilter: guestFilter,
+    setGuestFilter: setGuestFilter,
+    setLocationFilter: setLocationFilter,
+    locationFilter: locationFilter
+  })));
 }
 
 var _default = Filters;
@@ -28477,8 +28620,8 @@ function Header(_ref) {
     alt: "WindBNB logo"
   }), _react.default.createElement(_Filters.default, {
     setGuestFilter: setGuestFilter,
-    setLocationFilter: setLocationFilter,
     guestFilter: guestFilter,
+    setLocationFilter: setLocationFilter,
     locationFilter: locationFilter
   }));
 }
@@ -28506,7 +28649,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function Stay(_ref) {
   var stay = _ref.stay;
-  console.log(stay);
   return _react.default.createElement("article", null, _react.default.createElement("img", {
     src: stay.photo,
     alt: stay.title
@@ -28751,12 +28893,15 @@ function App() {
       stays = _useState2[0],
       setStays = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(""),
+  var _useState3 = (0, _react.useState)({
+    adult: 0,
+    children: 0
+  }),
       _useState4 = _slicedToArray(_useState3, 2),
       guestFilter = _useState4[0],
       setGuestFilter = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(""),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       locationFilter = _useState6[0],
       setLocationFilter = _useState6[1];
@@ -28769,14 +28914,6 @@ function App() {
     setStays(_stays.default);
   }, []);
 
-  function filterByGuest(stay) {
-    if (!guestFilter) {
-      return stay;
-    }
-
-    return stay.maxGuests > Number(guestFilter);
-  }
-
   function filterByLocation(stay) {
     if (!locationFilter) {
       return stay;
@@ -28785,13 +28922,21 @@ function App() {
     return stay.city === locationFilter;
   }
 
+  function filterByGuest(stay) {
+    if (!guestFilter) {
+      return stay;
+    }
+
+    return stay.maxGuests > guestFilter.adult + guestFilter.children;
+  }
+
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.default, {
+    guestFilter: guestFilter,
     setGuestFilter: setGuestFilter,
-    setLocationFilter: setLocationFilter,
     locationFilter: locationFilter,
-    guestFilter: guestFilter
+    setLocationFilter: setLocationFilter
   }), _react.default.createElement(_StaysList.default, {
-    stays: stays.filter(filterByGuest).filter(filterByLocation)
+    stays: stays.filter(filterByLocation).filter(filterByGuest)
   }));
 }
 
@@ -28837,7 +28982,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53795" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49956" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
